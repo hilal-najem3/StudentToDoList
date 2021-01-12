@@ -23,6 +23,11 @@ const routes: Routes = [
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'test',
+    loadChildren: () => import('./pages/test/test.module').then( m => m.TestPageModule),
+    canLoad: [AuthGuard]
   }
 ];
 @NgModule({
