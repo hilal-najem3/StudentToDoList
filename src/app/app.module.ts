@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy, Router } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { Platform } from '@ionic/angular';
 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -20,7 +22,9 @@ import { Platform } from '@ionic/angular';
 	  BrowserModule, 
 	  IonicModule.forRoot(), 
 	  AppRoutingModule,
-	  HttpClientModule
+	  HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     StatusBar,
@@ -32,7 +36,6 @@ import { Platform } from '@ionic/angular';
 export class AppModule {
 
   constructor(
-    private router: Router,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
