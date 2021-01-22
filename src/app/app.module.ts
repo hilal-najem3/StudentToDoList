@@ -15,6 +15,10 @@ import { Platform } from '@ionic/angular';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,7 +28,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 	  AppRoutingModule,
 	  HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     StatusBar,

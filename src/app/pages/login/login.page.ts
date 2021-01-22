@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
   }
  
   async login() {
-    const loading = await this.loadingController.create();
+      /*const loading = await this.loadingController.create();
     await loading.present();
     
     this.authService.login(this.credentials.value).subscribe(
@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
  
         await alert.present();
       }
-    );
+    );*/
   }
  
   // Easy access for form fields

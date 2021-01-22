@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class RegisterPage implements OnInit {
 
   credentials: FormGroup;
+  errorMessage: string = '';
  
   constructor(
     private fb: FormBuilder,
@@ -23,16 +24,47 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      first_name: ['First Name', [Validators.required]],
-      last_name: ['Last Name', [Validators.required]],
-      email: ['eve.holt@reqres.in', [Validators.required, Validators.email]],
-      password: ['cityslicka', [Validators.required, Validators.minLength(6)]],
-      password_confirmation: ['cityslicka', [Validators.required, Validators.minLength(6)]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      email: ['hilal123najem@gmail.com', [Validators.required, Validators.email]],
+      password: ['Hilal123', [Validators.required, Validators.minLength(6)]],
+      password_confirmation: ['Hilal123', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   async register() {
+    const loading = await this.loadingController.create();
+    await loading.present();
 
+    var data = {
+      email: this.credentials.get('email'),
+      password: this.credentials.get('password');
+    };
+
+    this.authService.register(data)
+      .then(res => {
+        console.log(res);
+        this.errorMessage = "";
+        await this.loginUser(data);
+        await loading.dismiss();
+      }, err => {
+        console.log(err);
+        this.errorMessage = err.message;
+        await loading.dismiss();
+      })
+  }
+
+  async loginUser(data) {
+    this.authService.login(data)
+      .then(res => {
+        console.log(res);
+        this.errorMessage = "";
+        this.authService.isAuthenticated.next(true);
+        this.router.navigateByUrl('/tabs', { replaceUrl: true });
+      }, err => {
+        this.errorMessage = err.message;
+        this.authService.isAuthenticated.next(false);
+      })
   }
 
   login() {
