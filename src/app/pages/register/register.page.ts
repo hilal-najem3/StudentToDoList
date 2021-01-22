@@ -1,6 +1,6 @@
 import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ControlContainer } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -39,4 +39,24 @@ export class RegisterPage implements OnInit {
     this.router.navigateByUrl('/login', { replaceUrl: true });
   }
 
+  // Easy access for form fields
+  get email() {
+    return this.credentials.get('email');
+  }
+  
+  get password() {
+    return this.credentials.get('password');
+  }
+
+  get first_name() {
+    return this.credentials.get('first_name');
+  }
+  
+  get last_name() {
+    return this.credentials.get('last_name');
+  }
+
+  get password_confirmation() {
+    return this.credentials.get('password_confirmation');
+  }
 }
